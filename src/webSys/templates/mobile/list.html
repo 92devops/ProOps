@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}靓号管理{% endblock %}
+{% block nav-3 %}active{% endblock %}
+
+{% block main%}
+<div class="container">
+<div class="bs-example" data-example-id="panel-without-body-with-table">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="input-group">
+              <i class=" glyphicon glyphicon-th-list" style="margin-right: 6px"></i>
+                <a class="btn btn-primary" href="/mobile/add/">添加手机号</a>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+          <div class="col-lg-2">
+            <form method="GET">
+              <div class="input-group">
+              <input type="text" class="form-control"    name="q" placeholder="过滤手机号" value="{{search_data}}">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+              </span>
+            </div><!-- /input-group -->
+            </form>
+          </div><!-- /.col-lg-6 -->
+          <div class="col-lg-6">
+            <div class="input-group">
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+      </div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>手机号</th>
+            <th>价格</th>
+            <th>级别</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        {%  for mobile in mobiles %}
+          <tr>
+            <th scope="row">{{mobile.id}}</th>
+            <td>{{mobile.mobile_num}}</td>
+            <td>{{mobile.price }}</td>
+            <td>{{ mobile.get_level_display }}</td>
+            <td>{{mobile.get_status_display}}</td>
+            <td>
+                <a class="btn btn-info btn-sm" href="/mobile/edit/{{ mobile.id }}/" >编辑</a>
+                <a class="btn btn-danger btn-sm" href="/mobile/del/{{ mobile.id }}/">删除</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  <div style="margin-top: 5px;text-align: center">
+  <nav aria-label="...">
+     <ul class="pagination">
+          {{ page_string }}
+     </ul>
+</nav>
+  </div>
+  </div>
+</div>
+{% endblock %}

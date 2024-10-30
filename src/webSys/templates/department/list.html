@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}部门管理{% endblock %}
+{% block nav-1 %}active{% endblock %}
+
+{% block main%}
+<div class="container">
+<div class="bs-example" data-example-id="panel-without-body-with-table">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading"><i class=" glyphicon glyphicon-th-list" style="margin-right: 6px"></i><a class="btn btn-primary" href="/department/add/">新增部门</a></div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>部门名称</th>
+            <th>创建时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        {%  for department in departments %}
+          <tr>
+            <th scope="row">{{department.id}}</th>
+            <td>{{department.name}}</td>
+            <td>{{department.created_at | date:"Y-m-d"}}</td>
+            <td>
+                <a class="btn btn-info btn-sm" href="/department/edit/{{ department.id }}/" >编辑</a>
+                <a class="btn btn-danger btn-sm" href="/department/del/{{ department.id }}/">删除</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
